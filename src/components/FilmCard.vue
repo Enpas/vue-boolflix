@@ -1,11 +1,23 @@
 <template>
   <section>
-    <div class="box-filmCard mb-3">
+    <div class="card">
+      <img v-if="film.poster_path === null" src="#" :alt="film.title">
+      <img v-if="film.poster_path != null" :src="`https://image.tmdb.org/t/p/w300${film.poster_path}`" :alt="film.name">
       <ul>
         <li><span>Titolo:</span> {{ film.title }}</li>
         <li><span>Titolo originale:</span> {{ film.original_title }}</li>
         <li><span>Lingua originale:</span> <CountryFlag :country="this.filterLang" size='small'/></li>
-        <li><span>Voto:</span> {{ film.vote_average }}</li>
+        <li>
+            <span>Voto: </span> 
+            <span>
+              <i v-for="(i, index) in this.convertVote" :key="index" class="fas fa-star"></i>
+            </span>
+
+            <span> 
+              <i v-for="(i, index) in (5 - this.convertVote)" :key="index" class="far fa-star"></i>
+            </span>
+          </li>
+          <li v-if="film.overview != ''"><span>Overview:</span> {{ film.overview }}</li>
       </ul>
     </div>
   </section>
@@ -45,20 +57,14 @@ export default {
         return 'se'
       }
       return this.film.original_language
+    },
+    convertVote() {
+      return Math.ceil((this.film.vote_average * 5) / 10)
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-  .box-filmCard {
-    background-color: rgb(196, 215, 255);
-    flex-basis: calc(100% / 5);
-    width: 250px;
-    min-height: 150px;
-    
-    span {
-      font-weight: 600;
-    }
-  }
+
 </style>

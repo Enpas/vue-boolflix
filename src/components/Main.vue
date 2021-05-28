@@ -1,6 +1,6 @@
 <template>
   <main class="container">
-    <h2 class="text-center" v-if="this.filmList.length === 0 && this.tvList.length === 0">Attenzione! nessun risultato trovato!</h2>
+
     <h3 v-if="this.filmList.length != 0">Film</h3>
     <div class="box-card">
       <FilmCard 
@@ -9,13 +9,22 @@
       />
     </div>
 
-    <h3 v-if="this.tvList.length != 0">Show</h3>
+    <div class="boxNotFound">
+      <h2 v-if="this.filmList.length === 0">Nessun Film trovato!</h2>
+    </div>
+
+    <h3 v-if="this.tvList.length != 0">Serie TV</h3>
     <div class="box-card">
       <TvCard 
         :show="show"
         v-for="show in tvList" :key="show.id"
       />
     </div>
+
+    <div class="boxNotFound">
+      <h2 v-if="this.tvList.length === 0">Nessuna Serie TV trovata!</h2>
+    </div>
+
   </main>
 </template>
 
@@ -36,9 +45,25 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .box-card {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
+  main {
+    min-height: calc(100vh - 80px);
+    padding-top: 20px;
+    background-color: #434343;
+    h3 {
+      font-size: 26px;
+      margin: 30px 0;
+      color: #FFF;
+    }
+    .box-card {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+    .boxNotFound {
+      font-size: 26px;
+      text-align: center;
+      padding-top: 60px;
+      color: #FFF;
+    }
   }
 </style>

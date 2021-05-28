@@ -1,9 +1,9 @@
 <template>
-  <header class="d-flex align-items-center mb-3">
-    <div class="logo col-3 offset-1">
-      <h1>Logo boolflix</h1>
+  <header class="container">
+    <div>
+      <h1>BOOLFLIX</h1>
     </div>
-    <div class="col-3 offset-4 d-flex justify-content-evenly">
+    <div class="input-research">
       <input 
         type="text" 
         placeholder="Cerca..." 
@@ -33,30 +33,27 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-header{
-  height: 80px;
-  background-color:#71e64dab;
-  .logo {
-    font-size: 30px;
-    text-transform: uppercase;
-    margin-left: 180px;
-    color: #FFF;
-  }
-  input{
-    border: none;
-    padding: 0 20px;
-    border-radius:5px;
-    outline: none;
-   }
-   button {
-    padding: 5px 20px;
-    border: 0;
-    border-radius: 10px;
-    color: #FFF;
-    background-color: #2c8daa;
-    &:hover {
-      transform: scale(1.1);
+header {
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #000;
+    h1 {
+      color: #F00;
+      margin-right: 40px;
     }
-   }
-}
+    .input-research {
+      overflow-x: hidden ;
+      input {
+        width: 500px;
+        padding: 10px 20px;
+        outline: none;
+      }
+      button {
+        padding: 10px 20px;
+        margin-left: 20px;
+      }
+    }
+  }
 </style>

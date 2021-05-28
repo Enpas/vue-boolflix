@@ -1,11 +1,23 @@
 <template>
   <section>
-    <div class="box-tvCard mb-3">
+    <div class="card">
+      <img v-if="show.backdrop_path === null" src="#" :alt="show.name">
+      <img v-if="show.backdrop_path != null" :src="`https://image.tmdb.org/t/p/w300${show.backdrop_path}`" :alt="show.name">
       <ul>
         <li><span>Titolo:</span> {{ show.name }}</li>
         <li><span>Titolo originale:</span> {{ show.original_name }}</li>
         <li><span>Lingua originale:</span> <CountryFlag :country="this.filterLang" size='small'/></li>
-        <li><span>Voto:</span> {{ show.vote_average }}</li>
+        <li>
+            <span>Voto: </span>
+            <span>
+              <i v-for="(i, index) in this.convertVote" :key="index" class="fas fa-star"></i>
+            </span>
+
+            <span>
+              <i v-for="(i, index) in (5 - this.convertVote)" :key="index" class="far fa-star"></i>
+            </span>
+          </li>
+          <li v-if="show.overview != ''"><span>Overview: </span> {{show.overview}}</li>
       </ul>
     </div>
   </section>
@@ -44,20 +56,14 @@ export default {
         return 'se'
       }
       return this.show.original_language
+    },
+    convertVote() {
+      return Math.ceil((this.show.vote_average * 5) / 10)
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-  .box-tvCard {
-    background-color: rgb(252, 172, 53);
-    flex-basis: calc(100% / 5);
-    width: 250px;
-    min-height: 150px;
-    
-    span {
-      font-weight: 600;
-    }
-  }
+
 </style>
