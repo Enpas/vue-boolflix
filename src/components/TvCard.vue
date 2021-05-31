@@ -1,24 +1,37 @@
 <template>
   <section>
     <div class="card">
-      <img v-if="show.backdrop_path === null" src="#" :alt="show.name">
-      <img v-if="show.backdrop_path != null" :src="`https://image.tmdb.org/t/p/w300${show.backdrop_path}`" :alt="show.name">
-      <ul>
-        <li><span>Titolo:</span> {{ show.name }}</li>
-        <li><span>Titolo originale:</span> {{ show.original_name }}</li>
-        <li><span>Lingua originale:</span> <CountryFlag :country="this.filterLang" size='small'/></li>
-        <li>
-            <span>Voto: </span>
-            <span>
-              <i v-for="(i, index) in this.convertVote" :key="index" class="fas fa-star"></i>
-            </span>
+      <div class="flip-card">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <img v-if="show.backdrop_path === null" src="#" :alt="show.name">
+            <img v-if="show.backdrop_path != null" :src="`https://image.tmdb.org/t/p/w300${show.backdrop_path}`" :alt="show.name">
+          </div>
+          <div class="flip-card-back">
+            <div class="overview-container">
+              <ul>
+                <li><span>Titolo:</span> {{ show.name }}</li>
+                <li><span>Titolo originale:</span> {{ show.original_name }}</li>
+                <li><span>Lingua originale:</span> <CountryFlag :country="this.filterLang" size='small'/></li>
+                <li>
+                    <span>Voto: </span>
+                    <span>
+                      <i v-for="(i, index) in this.convertVote" :key="index" class="fas fa-star"></i>
+                    </span>
 
-            <span>
-              <i v-for="(i, index) in (5 - this.convertVote)" :key="index" class="far fa-star"></i>
-            </span>
-          </li>
-          <li v-if="show.overview != ''"><span>Overview: </span> {{show.overview}}</li>
-      </ul>
+                    <span>
+                      <i v-for="(i, index) in (5 - this.convertVote)" :key="index" class="far fa-star"></i>
+                    </span>
+                  </li>
+                  <li v-if="show.overview != ''"><span>Overview: </span> {{show.overview}}</li>
+                  <li v-else-if="show.overview === ''">
+                    <h5>Nessuna overview trovata</h5>
+                  </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 </template>
@@ -65,5 +78,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+.card {
+    height: 200px;
+    img {
+      width: 100%;
+      height: 196px;
+    }
+    @media all and (max-width: 629px) {
+      height: 160px;
+        img {
+          height: 156px;
+        }
+    }
+  }
 </style>

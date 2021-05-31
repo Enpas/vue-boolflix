@@ -1,27 +1,39 @@
 <template>
   <section>
     <div class="card">
-      <img v-if="film.poster_path === null" src="#" :alt="film.title">
-      <img v-if="film.poster_path != null" :src="`https://image.tmdb.org/t/p/w300${film.poster_path}`" :alt="film.name">
-      <ul>
-        <li><span>Titolo:</span> {{ film.title }}</li>
-        <li><span>Titolo originale:</span> {{ film.original_title }}</li>
-        <li><span>Lingua originale:</span> <CountryFlag :country="this.filterLang" size='small'/></li>
-        <li>
-            <span>Voto: </span> 
-            <span>
-              <i v-for="(i, index) in this.convertVote" :key="index" class="fas fa-star"></i>
-            </span>
+      <div class="flip-card">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <img v-if="film.poster_path === null" src="#" :alt="film.title">
+            <img v-if="film.poster_path != null" :src="`https://image.tmdb.org/t/p/w300${film.poster_path}`" :alt="film.name">
+          </div>
+          <div class="flip-card-back">
+            <div class="overview-container">
+              <ul>
+                <li><span>Titolo:</span> {{ film.title }}</li>
+                <li><span>Titolo originale:</span> {{ film.original_title }}</li>
+                <li><span>Lingua originale:</span> <CountryFlag :country="this.filterLang" size='small'/></li>
+                <li>
+                    <span>Voto: </span> 
+                    <span>
+                      <i v-for="(i, index) in this.convertVote" :key="index" class="fas fa-star"></i>
+                    </span>
 
-            <span> 
-              <i v-for="(i, index) in (5 - this.convertVote)" :key="index" class="far fa-star"></i>
-            </span>
-          </li>
-          <li v-if="film.overview != ''"><span>Overview:</span> {{ film.overview }}</li>
-      </ul>
+                    <span> 
+                      <i v-for="(i, index) in (5 - this.convertVote)" :key="index" class="far fa-star"></i>
+                    </span>
+                  </li>
+                  <li v-if="film.overview != ''"><span>Overview:</span> {{ film.overview }}</li>
+                  <li v-else-if="film.overview === ''">
+                    <h5>Nessuna overview trovata</h5>
+                  </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
-
 </template>
 
 <script>

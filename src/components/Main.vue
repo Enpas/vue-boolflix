@@ -50,7 +50,7 @@ export default {
     padding-top: 20px;
     background-color: #434343;
     h3 {
-      font-size: 26px;
+      font-size: 32px;
       margin: 30px 0;
       color: #FFF;
     }
@@ -64,6 +64,14 @@ export default {
       text-align: center;
       padding-top: 60px;
       color: #FFF;
+    }
+    @media all and (max-width: 629px) {
+     .boxNotFound {
+       font-size: 16px;
+     } 
+     h3 {
+       font-size: 22px;
+     }
     }
   }
 </style>
