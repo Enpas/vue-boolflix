@@ -1,9 +1,13 @@
 <template>
   <header class="container">
+
     <div class="logo">
       <h1>BOOLFLIX</h1>
     </div>
+
     <div class="input-research">
+
+      <!-- aggiungo la funzione sendQuery sia all'input che al button per poter utilizzare il click sul btn e il tasto enter nell'input -->
       <input 
         type="text" 
         placeholder="Cerca..." 
@@ -11,7 +15,9 @@
         @keyup.enter="sendQuery()"
       >
       <button @click="sendQuery()">CERCA</button>
+
     </div>
+    
   </header>
 </template>
 
@@ -24,6 +30,7 @@ export default {
     }
   },
   methods: {
+    // $emit di ricerca per la funzione searching in App
     sendQuery() {
       this.$emit('searchQuery', this.apiQuery);
       this.apiQuery = '';

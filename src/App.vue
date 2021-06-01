@@ -1,13 +1,20 @@
 <template>
+
   <div id="app">
+
+    <!-- all'evento $emit searchQuery nel componente Header invoco la funzione searching -->
     <Header
       @searchQuery="searching"
     />
+
+    <!-- visualizzo il componente Main il quale contiene sia i film che le serie tv -->
     <Main 
       :filmList="filmList"
       :tvList="tvList"
     />
+
   </div>
+
 </template>
 
 <script>
@@ -33,6 +40,7 @@ export default {
     }
   },
   methods: {
+    // funzione per ricercare film e serie tv nell'API
     searching(apiQuery) {
       this.apiQuery = apiQuery;
       let request = {
@@ -43,11 +51,13 @@ export default {
           page: this.apiPage
         }
       }
+      // effettuo la chiamata solo se c'è un testo da cercare scritto nell'input
       if (apiQuery != '') {
         axios.all([
             axios.get(this.apiMoviesURL, request),
             axios.get(this.apiTvURL, request)
           ])
+        // uso l'operatore spread per rendere riutilizzabili filmList e tvList nel componente Main
         .then(axios.spread((resMovies, resTv) => {
           this.filmList = resMovies.data.results;
           this.tvList = resTv.data.results;

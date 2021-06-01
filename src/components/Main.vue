@@ -1,7 +1,10 @@
 <template>
   <main class="container">
 
+    <!-- stampo a schermo il titolo di filmList -->
     <h3 v-if="this.filmList.length != 0">Film</h3>
+
+    <!-- stampo a schermo la lista di film ricercata dall'utente -->
     <div class="box-card">
       <FilmCard 
         :film="film"
@@ -9,11 +12,15 @@
       />
     </div>
 
+    <!-- in caso di assenza di film visualizzo questo h2 -->
     <div class="boxNotFound">
       <h2 v-if="this.filmList.length === 0">Nessun Film trovato!</h2>
     </div>
 
+    <!-- stampo a schermo il titolo di tvList -->
     <h3 v-if="this.tvList.length != 0">Serie TV</h3>
+    
+    <!-- stampo a schermo la lista di serie tv ricercata dall'utente -->
     <div class="box-card">
       <TvCard 
         :show="show"
@@ -21,6 +28,7 @@
       />
     </div>
 
+    <!-- in caso di assenza di serie tv visualizzo questo h2 -->
     <div class="boxNotFound">
       <h2 v-if="this.tvList.length === 0">Nessuna Serie TV trovata!</h2>
     </div>
